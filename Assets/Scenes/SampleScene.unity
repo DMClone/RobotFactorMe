@@ -146,7 +146,7 @@ Transform:
   m_GameObject: {fileID: 38246589}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.4, z: 0}
+  m_LocalPosition: {x: 0, y: -1.4, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -242,7 +242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &385172454
 Transform:
   m_ObjectHideFlags: 0
@@ -372,6 +372,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 38246590}
+  - {fileID: 2127061736}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &842629643
@@ -387,7 +388,7 @@ GameObject:
   - component: {fileID: 842629646}
   - component: {fileID: 842629645}
   m_Layer: 0
-  m_Name: TestButton_0 (2)
+  m_Name: MapButton
   m_TagString: Clickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -402,7 +403,7 @@ Transform:
   m_GameObject: {fileID: 842629643}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.025, z: -0.1}
+  m_LocalPosition: {x: 0, y: 0.035, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -679,9 +680,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.05
+    y: 0
     width: 1
-    height: 0.90000004
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -756,7 +757,7 @@ Transform:
   m_GameObject: {fileID: 1050420804}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.25, y: 0.31, z: -1}
+  m_LocalPosition: {x: -2.2, y: 0.3, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -837,7 +838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!156049354 &1067567444
 Grid:
   m_ObjectHideFlags: 0
@@ -859,7 +860,7 @@ Transform:
   m_GameObject: {fileID: 1067567443}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 0, y: 0.17, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -910,8 +911,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -515279735188762471, guid: b60439d8d1c90c64982d51bc04982c6c, type: 3}
-  m_Color: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
+  m_Sprite: {fileID: -6613807483286432115, guid: 86e190339d8b512419b735e8616e071b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -993,7 +994,7 @@ GameObject:
   - component: {fileID: 1332535158}
   - component: {fileID: 1332535157}
   m_Layer: 0
-  m_Name: TestButton_0 (1)
+  m_Name: GridButton
   m_TagString: Clickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1008,7 +1009,7 @@ Transform:
   m_GameObject: {fileID: 1332535155}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.325, z: -0.1}
+  m_LocalPosition: {x: 0, y: 0.3475, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1156,7 +1157,7 @@ GameObject:
   - component: {fileID: 1421957207}
   - component: {fileID: 1421957209}
   m_Layer: 0
-  m_Name: TestButton_0
+  m_Name: InventoryButton
   m_TagString: Clickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1171,7 +1172,7 @@ Transform:
   m_GameObject: {fileID: 1421957205}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.65, z: -0.1}
+  m_LocalPosition: {x: 0, y: 0.66, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1652,7 +1653,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 722623761}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2142590066
 GameObject:
@@ -1750,4 +1751,3 @@ SceneRoots:
   - {fileID: 1319443675}
   - {fileID: 2007186204}
   - {fileID: 722623761}
-  - {fileID: 2127061736}
