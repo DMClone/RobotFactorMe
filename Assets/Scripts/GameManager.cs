@@ -3,8 +3,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+    // [SerializeField] private TileDragHandler tileDragHandler;
     [SerializeField] private SettingsManager settingsManager;
+    private GameActions controls;
+
     public GameState CurrentGameState { get; private set; } = GameState.Idle;
+
 
     private void Awake()
     {
@@ -17,6 +22,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        controls = new GameActions();
     }
 }
 
