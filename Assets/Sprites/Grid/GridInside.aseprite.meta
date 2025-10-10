@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1f32dc00842dda647b99ca6f8484a6c5
+guid: bcf170d85a30d0e49ba258038179fdda
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -102,7 +102,7 @@ ScriptedImporter:
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638956986906176976
+  platformSettingsDirtyTick: 638956987112763296
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -127,7 +127,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: SideButtons
+  - name: GridInside
     originalName: 
     pivot: {x: 0.5, y: 0}
     alignment: 9
@@ -137,9 +137,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 20
-      height: 60
-    spriteID: 798d689c6a1919f42831247dcefbfd64
+      width: 150
+      height: 64
+    spriteID: 69d6206423903a746a829d642ed63b05
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -153,25 +153,25 @@ ScriptedImporter:
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 2169855702
+      value0: 1434523306
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: SideButtons
+    name: GridInside
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: SideButtons
+    - name: GridInside
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
-        width: 20
-        height: 60
-      spriteId: 798d689c6a1919f42831247dcefbfd64
+        width: 150
+        height: 64
+      spriteId: 69d6206423903a746a829d642ed63b05
     linkedCells: []
     tileCells: []
     tileSetIndex: 0
@@ -217,5 +217,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 20, y: 60}
-  previousTextureSize: {x: 64, y: 128}
+  canvasSize: {x: 150, y: 64}
+  previousTextureSize: {x: 256, y: 128}

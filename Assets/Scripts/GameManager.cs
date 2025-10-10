@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 
     // [SerializeField] private TileDragHandler tileDragHandler;
     [SerializeField] private SettingsManager settingsManager;
-    private GameActions controls;
+    public GameActions controls;
 
     public GameState CurrentGameState { get; private set; } = GameState.Idle;
 
@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         controls = new GameActions();
+        controls.Enable();
     }
 }
 

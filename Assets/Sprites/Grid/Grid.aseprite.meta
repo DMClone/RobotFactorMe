@@ -102,7 +102,7 @@ ScriptedImporter:
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638953862282999709
+  platformSettingsDirtyTick: 638956987112763296
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -137,8 +137,8 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 150
-      height: 70
+      width: 152
+      height: 72
     spriteID: 92521c33781cc7f4f95fdaf927ff5071
     spriteBone: []
     spriteOutline: []
@@ -169,8 +169,8 @@ ScriptedImporter:
       cellRect:
         x: 0
         y: 0
-        width: 150
-        height: 70
+        width: 152
+        height: 72
       spriteId: 92521c33781cc7f4f95fdaf927ff5071
     linkedCells: []
     tileCells: []
@@ -217,5 +217,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 150, y: 70}
+  canvasSize: {x: 152, y: 72}
   previousTextureSize: {x: 256, y: 128}
