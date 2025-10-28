@@ -9,12 +9,12 @@ public class BaseTile : MonoBehaviour
     [Header("Grid Info")]
     public Vector2Int gridPosition;
     public List<BaseTile> neighbors = new List<BaseTile>();
+    [HideInInspector] public int tileID;
 
     [Header("Custom Components")]
     public bool isWalkable = true; // replace
     public int heightLevel = 0; // replace
 
-    // Optional: Called after grid is built
     public void Initialize(Vector2Int pos)
     {
         gridPosition = pos;
@@ -35,4 +35,8 @@ public class BaseTile : MonoBehaviour
         gridManager.AssignNeighborsToSingularTile(this, false);
     }
 
+    public virtual void OnClick()
+    {
+        gridManager.PlaceTileAt(gridPosition.x, gridPosition.y, 1);
+    }
 }

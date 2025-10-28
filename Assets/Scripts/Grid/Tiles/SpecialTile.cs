@@ -12,4 +12,9 @@ public class SpecialTile : BaseTile
             }
         }
     }
+
+    public override void OnClick()
+    {
+        Debug.Log(name); ;
+    }
 }

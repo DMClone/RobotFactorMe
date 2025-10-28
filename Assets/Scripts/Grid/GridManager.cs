@@ -34,7 +34,8 @@ public class GridManager : MonoBehaviour
         {
             for (int x = 0; x < gridData.width; x++)
             {
-                GameObject obj = Instantiate(tilePrefabs[gridData.tiles[y * gridData.width + x]],
+                int tileIndex = gridData.tiles[y * gridData.width + x];
+                GameObject obj = Instantiate(tilePrefabs[tileIndex],
                 new Vector3(content.transform.position.x + spaceBetweenTiles * 0.5f + x * spaceBetweenTiles,
                 content.transform.position.y - spaceBetweenTiles + y * -spaceBetweenTiles,
                 content.transform.localPosition.x - 3),
@@ -43,6 +44,7 @@ public class GridManager : MonoBehaviour
 
                 BaseTile tile = obj.GetComponent<BaseTile>();
                 tile.gridManager = this;
+                tile.tileID = gridData.tiles[y * gridData.width + x];
                 tile.Initialize(new Vector2Int(x, y));
                 tiles[x, y] = tile;
             }
@@ -105,17 +107,38 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    // private void OnApplicationQuit()
-    // {
-    //     gridData.tiles = new int[gridData.width * gridData.height];
-    //     for (int y = 0; y < gridData.height; y++)
-    //     {
-    //         for (int x = 0; x < gridData.width; x++)
-    //         {
-    //             gridData.tiles[y * gridData.height + x] = tiles[x, y].tileID;
-    //         }
-    //     }
-    // }
+    public void PlaceTileAt(int x, int y, int tileID)
+    {
+        Destroy(tiles[x, y].gameObject);
+
+        GameObject obj = Instantiate(tilePrefabs[tileID],
+            new Vector3(content.transform.position.x + spaceBetweenTiles * 0.5f + x * spaceBetweenTiles,
+            content.transform.position.y - spaceBetweenTiles + y * -spaceBetweenTiles,
+            content.transform.localPosition.x - 3),
+            Quaternion.identity,
+            content.transform);
+
+        BaseTile tile = obj.GetComponent<BaseTile>();
+        tile.gridManager = this;
+        tile.tileID = tileID;
+        tile.Initialize(new Vector2Int(x, y));
+        tiles[x, y] = tile;
+
+        AssignNeighborsToSingularTile(tile, true);
+    }
+
+    private void OnApplicationQuit()
+    {
+
+        for (int y = 0; y < gridData.height; y++)
+        {
+            for (int x = 0; x < gridData.width; x++)
+            {
+                gridData.tiles[y * gridData.width + x] = tiles[x, y].tileID;
+            }
+        }
+        Debug.Log("Grid data saved on application quit.");
+    }
 
     // private int GetTileScript()
     // {
