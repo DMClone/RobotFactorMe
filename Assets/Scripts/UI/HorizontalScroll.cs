@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Animations;
 
-public class HorizontalScroll : MonoBehaviour
+public class HorizontalScroll : DragScreen
 {
     public GameManager gameManager;
     public Transform content;
@@ -13,16 +13,11 @@ public class HorizontalScroll : MonoBehaviour
     public float minX;  // left clamp
     public float maxX = 50f;   // right clamp
 
-
     private Vector3 lastPointerPos;
     private float velocity;
     private bool dragging;
 
     private float scrollPos;
-    public bool pressed;
-
-
-
 
     void Update()
     {

@@ -1,14 +1,19 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class WorldButtonHandler : MonoBehaviour
 {
+    public static WorldButtonHandler instance;
+
     public Camera cam;
-    public HorizontalScroll horizontalScroll;
     private GameActions controls;
+    public UnityEvent MouseReleaseEvent;
 
     private void Awake()
     {
+        instance = this;
+
         controls = new GameActions();
         controls.Player.Click.performed += ctx => OnClick();
         controls.Player.Click.canceled += ctx => OnClickRelease();
@@ -39,14 +44,14 @@ public class WorldButtonHandler : MonoBehaviour
 
             if (hit.transform.CompareTag("GridDraggable"))
             {
-                horizontalScroll.pressed = true;
+                hit.transform.GetComponent<DragHandle>().OnClick();
             }
         }
     }
 
     void OnClickRelease()
     {
-        horizontalScroll.pressed = false;
+        MouseReleaseEvent.Invoke();
     }
 
     void StartGame()
