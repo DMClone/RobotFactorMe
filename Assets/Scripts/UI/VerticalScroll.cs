@@ -4,14 +4,15 @@ public class VerticalScroll : DragScreen
 {
     public GameManager gameManager;
     public Transform content;
-    public GameObject ScrollBar;
     public Camera cam;
 
     [Header("Scroll Settings")]
     public float scrollSpeed = 1f;
     public float inertiaDamping = 5f;
+    public float startingHeight = 0f;
+    public float heightPerRow = 1f;
     public float minY;  // bottom clamp
-    public float maxY = 50f;   // top clamp
+    [ReadOnly] private float maxY;   // top clamp
 
     private Vector3 lastPointerPos;
     private float velocity;
@@ -71,5 +72,10 @@ public class VerticalScroll : DragScreen
         }
     }
 
-
+    public void SetContentSize(int itemCount, int itemsPerRow)
+    {
+        int totalRows = Mathf.CeilToInt((float)itemCount / itemsPerRow);
+        float contentHeight = startingHeight + (totalRows - 1) * heightPerRow;
+        maxY = contentHeight - startingHeight;
+    }
 }

@@ -130,14 +130,14 @@ ScriptedImporter:
   - name: Scrollbar
     originalName: 
     pivot: {x: 0.5, y: 0}
-    alignment: 9
+    alignment: 7
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 4
+      width: 6
       height: 32
     spriteID: a06dd4198f9ec664eac561458f7af553
     spriteBone: []
@@ -169,7 +169,7 @@ ScriptedImporter:
       cellRect:
         x: 0
         y: 0
-        width: 4
+        width: 6
         height: 32
       spriteId: a06dd4198f9ec664eac561458f7af553
     linkedCells: []
@@ -217,5 +217,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 4, y: 32}
+  canvasSize: {x: 6, y: 32}
   previousTextureSize: {x: 32, y: 64}
