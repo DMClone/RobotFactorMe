@@ -8,11 +8,14 @@ public class GridInventory : MonoBehaviour
     public List<GameObject> items;
 
     public int tilesPerRow;
-    public float spaceBetweenTiles;
+    public float sizePerPixel;
+    public int tilePixelSize;
+    public int pixelsPadding;
 
     void Start()
     {
         OrderList();
+        verticalScroll.SetContentSize(items.Count, tilesPerRow);
     }
 
     public void AddItem(GameObject item)
@@ -32,11 +35,10 @@ public class GridInventory : MonoBehaviour
         {
             int row = i / tilesPerRow;
             int column = i % tilesPerRow;
-
             Vector3 newPosition = new Vector3(
-                            tileOrigin.transform.position.x + spaceBetweenTiles * 0.5f + column * spaceBetweenTiles,
-                            tileOrigin.transform.position.y - spaceBetweenTiles + row * -spaceBetweenTiles,
-                            tileOrigin.transform.position.z);
+                (column * (tilePixelSize + pixelsPadding)) * sizePerPixel,
+                -(row * (tilePixelSize + pixelsPadding)) * sizePerPixel,
+                0f);
 
             items[i].transform.position = newPosition;
             items[i].transform.SetParent(tileOrigin.transform);

@@ -47,10 +47,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridManager: {fileID: 0}
+  descriptionText: {fileID: 0}
   gridPosition: {x: 0, y: 0}
   neighbors: []
+  tileID: 0
   isWalkable: 0
   heightLevel: 3
+  description: This one however is special, and its pretty cool. What does it do?
+    It inherits from basetile, awesomesauce
 --- !u!212 &8898787210527130367
 SpriteRenderer:
   m_ObjectHideFlags: 0

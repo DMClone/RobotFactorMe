@@ -47,10 +47,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridManager: {fileID: 0}
+  descriptionText: {fileID: 0}
   gridPosition: {x: 0, y: 0}
   neighbors: []
+  tileID: 0
   isWalkable: 1
   heightLevel: 0
+  description: Coolass fucking tile but its normal its not that special
 --- !u!212 &6215471299600755581
 SpriteRenderer:
   m_ObjectHideFlags: 0

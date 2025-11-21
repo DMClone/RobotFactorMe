@@ -24,9 +24,7 @@ public class WorldButtonHandler : MonoBehaviour
 
     void OnClick()
     {
-        Vector2 screenPos = controls.Player.Position.ReadValue<Vector2>();
-        Vector3 screenPos3D = new Vector3(screenPos.x, screenPos.y, Mathf.Abs(cam.transform.position.z));
-        Vector3 worldPos = cam.ScreenToWorldPoint(screenPos3D);
+        Vector3 worldPos = GetWorldPosition();
 
         RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
         if (hit.collider != null)
@@ -49,13 +47,37 @@ public class WorldButtonHandler : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        Vector3 vector3 = GetWorldPosition();
+
+        RaycastHit2D hit = Physics2D.Raycast(vector3, Vector2.zero);
+        if (hit.collider != null)
+        {
+            if (hit.transform.CompareTag("Tile"))
+            {
+                hit.transform.GetComponent<BaseTile>().OnHover();
+            }
+            else
+            {
+                DescriptionText.instance.SetDescription("", -1);
+            }
+        }
+        else
+        {
+            DescriptionText.instance.SetDescription("", -1);
+        }
+    }
+
+    Vector3 GetWorldPosition()
+    {
+        Vector2 screenPos = controls.Player.Position.ReadValue<Vector2>();
+        Vector3 screenPos3D = new Vector3(screenPos.x, screenPos.y, Mathf.Abs(cam.transform.position.z));
+        return cam.ScreenToWorldPoint(screenPos3D);
+    }
+
     void OnClickRelease()
     {
         MouseReleaseEvent.Invoke();
-    }
-
-    void StartGame()
-    {
-
     }
 }

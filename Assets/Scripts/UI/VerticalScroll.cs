@@ -12,7 +12,7 @@ public class VerticalScroll : DragScreen
     public float startingHeight = 0f;
     public float heightPerRow = 1f;
     public float minY;  // bottom clamp
-    [ReadOnly] private float maxY;   // top clamp
+    public float maxY = 1;   // top clamp
 
     private Vector3 lastPointerPos;
     private float velocity;
@@ -76,6 +76,6 @@ public class VerticalScroll : DragScreen
     {
         int totalRows = Mathf.CeilToInt((float)itemCount / itemsPerRow);
         float contentHeight = startingHeight + (totalRows - 1) * heightPerRow;
-        maxY = contentHeight - startingHeight;
+        minY = contentHeight - startingHeight;
     }
 }

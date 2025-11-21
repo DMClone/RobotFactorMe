@@ -3,9 +3,6 @@ using System.Collections.Generic;
 
 public class BaseTile : MonoBehaviour
 {
-    [Header("References")]
-    public GridManager gridManager;
-
     [Header("Grid Info")]
     public Vector2Int gridPosition;
     public List<BaseTile> neighbors = new List<BaseTile>();
@@ -14,6 +11,7 @@ public class BaseTile : MonoBehaviour
     [Header("Custom Components")]
     public bool isWalkable = true; // replace
     public int heightLevel = 0; // replace
+    public string description;
 
     public void Initialize(Vector2Int pos)
     {
@@ -32,11 +30,19 @@ public class BaseTile : MonoBehaviour
 
     public void AssignNewNeighbors()
     {
-        gridManager.AssignNeighborsToSingularTile(this, false);
+
+        GridManager.instance.AssignNeighborsToSingularTile(this, false);
     }
 
     public virtual void OnClick()
     {
-        gridManager.PlaceTileAt(gridPosition.x, gridPosition.y, 1);
+        GridManager.instance.PlaceTileAt(gridPosition.x, gridPosition.y, 1);
+    }
+
+    public virtual void OnHover()
+    {
+        if (DescriptionText.instance.showingTileID != tileID)
+            DescriptionText.instance.SetDescription(description, tileID);
+        Debug.Log($"Hovering over tile at {gridPosition}");
     }
 }

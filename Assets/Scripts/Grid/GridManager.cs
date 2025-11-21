@@ -3,6 +3,8 @@ using UnityEngine.Tilemaps;
 
 public class GridManager : MonoBehaviour
 {
+    public static GridManager instance;
+
     [Header("References")]
     public GameObject[] tilePrefabs;
     public GridDataSO gridData;
@@ -16,18 +18,25 @@ public class GridManager : MonoBehaviour
     public bool createEmptyGrid = false;
     public BaseTile[,] tiles;
 
-    void Start()
+    private void Start()
     {
+        instance = this;
+
         if (gridData.tiles.Length != gridData.width * gridData.height)
             Debug.LogError("GridDataSO tiles array size does not match width*height");
         if (createEmptyGrid)
-            gridData.tiles = new int[gridData.width * gridData.height];
+            EmptyGridData();
         GenerateGrid();
         AssignNeighbors();
         horizontalScroll.minX = 2.25f + -gridData.width * spaceBetweenTiles;
     }
 
-    void GenerateGrid()
+    private void EmptyGridData()
+    {
+        gridData.tiles = new int[gridData.width * gridData.height];
+    }
+
+    private void GenerateGrid()
     {
         tiles = new BaseTile[gridData.width, gridData.height];
         for (int y = 0; y < gridData.height; y++)
@@ -43,7 +52,6 @@ public class GridManager : MonoBehaviour
                 content.transform);
 
                 BaseTile tile = obj.GetComponent<BaseTile>();
-                tile.gridManager = this;
                 tile.tileID = gridData.tiles[y * gridData.width + x];
                 tile.Initialize(new Vector2Int(x, y));
                 tiles[x, y] = tile;
@@ -53,8 +61,16 @@ public class GridManager : MonoBehaviour
 
 
 
-    void AssignNeighbors()
+    private void AssignNeighbors()
     {
+        // 4-directional adjacency
+        Vector2Int[] directions = {
+        new Vector2Int(0, 1),
+        new Vector2Int(0, -1),
+        new Vector2Int(1, 0),
+        new Vector2Int(-1, 0)
+        };
+
         for (int x = 0; x < gridData.width; x++)
         {
             for (int y = 0; y < gridData.height; y++)
@@ -62,13 +78,6 @@ public class GridManager : MonoBehaviour
                 BaseTile current = tiles[x, y];
                 current.neighbors.Clear();
 
-                // 4-directional adjacency
-                Vector2Int[] directions = {
-                    new Vector2Int(0, 1),
-                    new Vector2Int(0, -1),
-                    new Vector2Int(1, 0),
-                    new Vector2Int(-1, 0)
-                };
 
                 foreach (var dir in directions)
                 {
@@ -119,7 +128,6 @@ public class GridManager : MonoBehaviour
             content.transform);
 
         BaseTile tile = obj.GetComponent<BaseTile>();
-        tile.gridManager = this;
         tile.tileID = tileID;
         tile.Initialize(new Vector2Int(x, y));
         tiles[x, y] = tile;
@@ -140,8 +148,12 @@ public class GridManager : MonoBehaviour
         Debug.Log("Grid data saved on application quit.");
     }
 
-    // private int GetTileScript()
-    // {
-    //     for
-    // }
+    //Debug
+    [ContextMenu("Run My Function")]
+    private void CreateBlankGrid()
+    {
+        EmptyGridData();
+        GenerateGrid();
+    }
+
 }
