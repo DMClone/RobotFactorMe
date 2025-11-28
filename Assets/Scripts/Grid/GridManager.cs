@@ -149,7 +149,7 @@ public class GridManager : MonoBehaviour
     }
 
     //Debug
-    [ContextMenu("Run My Function")]
+    [ContextMenu("Create Blank Grid")]
     private void CreateBlankGrid()
     {
         EmptyGridData();

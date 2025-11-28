@@ -33,15 +33,15 @@ public class GridInventory : MonoBehaviour
     {
         for (int i = 0; i < items.Count; i++)
         {
-            int row = i / tilesPerRow;
+            int row = i / tilesPerRow + 1;
             int column = i % tilesPerRow;
             Vector3 newPosition = new Vector3(
                 (column * (tilePixelSize + pixelsPadding)) * sizePerPixel,
                 -(row * (tilePixelSize + pixelsPadding)) * sizePerPixel,
-                0f);
+                0);
 
-            items[i].transform.position = newPosition;
             items[i].transform.SetParent(tileOrigin.transform);
+            items[i].transform.localPosition = newPosition;
         }
     }
 }
