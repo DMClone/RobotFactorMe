@@ -17,6 +17,5 @@ public class DescriptionText : MonoBehaviour
     {
         text.text = desc;
         showingTileID = tileID;
-        Debug.Log($"Description set to: {desc}");
     }
 }

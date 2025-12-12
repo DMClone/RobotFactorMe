@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 public class BaseTile : MonoBehaviour
 {
-    [Header("Grid Info")]
+    [Header("Tile Info")]
     public Vector2Int gridPosition;
     public List<BaseTile> neighbors = new List<BaseTile>();
     [HideInInspector] public int tileID;
+    public bool isInGrid;
 
     [Header("Custom Components")]
     public bool isWalkable = true; // replace
@@ -43,6 +44,5 @@ public class BaseTile : MonoBehaviour
     {
         if (DescriptionText.instance.showingTileID != tileID)
             DescriptionText.instance.SetDescription(description, tileID);
-        Debug.Log($"Hovering over tile at {gridPosition}");
     }
 }

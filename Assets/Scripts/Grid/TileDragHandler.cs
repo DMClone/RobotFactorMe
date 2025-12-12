@@ -1,77 +1,64 @@
-// using UnityEngine;
-// using UnityEngine.Tilemaps;
-// using UnityEngine.InputSystem;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
-// public class TileDragHandler : MonoBehaviour
-// {
-//     public Tilemap gridTilemap;
-//     public Tilemap InventoryTilemap;
-//     public Color placeholderColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+public class TileDragHandler : MonoBehaviour
+{
+    [Header("References")]
+    [SerializeField] private WorldButtonHandler worldButtonHandler;
+    [SerializeField] private GameObject gridObject;
+    [SerializeField] private SpriteRenderer gridObjectSpriteRenderer;
 
-//     private TileBase draggedTile;
-//     private Vector3Int originalPos;
-//     private TileBase placeholderTile;
-//     private bool isDragging;
+    public Color placeholderColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
 
-//     void Update()
-//     {
-//         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-//         Vector3Int cellPos = gridTilemap.WorldToCell(mouseWorldPos);
+    [Header("Settings")]
+    private BaseTile draggingTile;
+    private Vector2Int originalGridPos;
+    private Vector3 originalPos;
+    public bool isDragging;
 
-//         if (Mouse.current.leftButton.wasPressedThisFrame)
-//         {
-//             TryPickUpTile(cellPos);
-//         }
+    void LateUpdate()
+    {
+        if (isDragging && draggingTile != null)
+        {
+            Vector3 mouseWorldPos = worldButtonHandler.mouseWorldPos;
+            gridObject.transform.position = new Vector3(mouseWorldPos.x, mouseWorldPos.y, gridObject.transform.position.z);
+        }
+    }
 
-//         if (isDragging)
-//         {
-//             // Show placeholder on the original position
-//             gridTilemap.SetTile(originalPos, placeholderTile);
+    public void TryPickUpTile(BaseTile baseTile, Sprite tileSprite)
+    {
+        Debug.Log("Picking up tile");
+        draggingTile = baseTile;
+        baseTile.GetComponent<SpriteRenderer>().color = placeholderColor;
+        gridObject.SetActive(true);
+        gridObjectSpriteRenderer.sprite = tileSprite;
+        originalGridPos = draggingTile.gridPosition;
+        originalPos = draggingTile.transform.position;
+        isDragging = true;
+    }
 
-//             // Optionally, you can create a "ghost" tile following the cursor
-//         }
+    public void SwapTile(BaseTile targetTile)
+    {
+        if (targetTile.isInGrid)
+        {
+            Debug.Log("Swapping tiles");
+            int tempID = targetTile.tileID;
+            Vector2Int targetPos = targetTile.gridPosition;
+            draggingTile.GetComponent<SpriteRenderer>().color = Color.white;
+            GridManager.instance.PlaceTileAt(targetPos.x, targetPos.y, draggingTile.tileID);
+            GridManager.instance.PlaceTileAt(originalGridPos.x, originalGridPos.y, tempID);
+            gridObject.SetActive(false);
+            Destroy(targetTile.gameObject);
+            Destroy(draggingTile.gameObject);
+            isDragging = false;
+        }
+    }
 
-//         if (Mouse.current.leftButton.wasReleasedThisFrame && isDragging)
-//         {
-//             DropTile(InventoryTilemap.WorldToCell(mouseWorldPos));
-//         }
-//     }
-
-//     void TryPickUpTile(Vector3Int pos)
-//     {
-//         TileBase tile = gridTilemap.GetTile(pos);
-//         if (tile != null)
-//         {
-//             draggedTile = tile;
-//             originalPos = pos;
-
-//             // Create placeholder tile
-//             placeholderTile = ScriptableObject.CreateInstance<Tile>();
-//             placeholderTile = tile.sprite;
-//             placeholderTile.color = placeholderColor;
-
-//             isDragging = true;
-
-//             // Remove the tile from source (or leave placeholder)
-//             gridTilemap.SetTile(pos, placeholderTile);
-//         }
-//     }
-
-//     void DropTile(Vector3Int pos)
-//     {
-//         Tilemap dropMap = InventoryTilemap; // could add logic to pick map based on mouse
-//         if (dropMap.GetTile(pos) == null)
-//         {
-//             dropMap.SetTile(pos, draggedTile);
-//         }
-//         else
-//         {
-//             // Optionally swap or cancel
-//             gridTilemap.SetTile(originalPos, draggedTile);
-//         }
-
-//         draggedTile = null;
-//         placeholderTile = null;
-//         isDragging = false;
-//     }
-// }
+    public void DropTile()
+    {
+        Debug.Log("Dropping tile");
+        gridObject.SetActive(false);
+        isDragging = false;
+        draggingTile = null;
+    }
+}

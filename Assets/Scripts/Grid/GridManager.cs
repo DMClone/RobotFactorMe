@@ -52,6 +52,7 @@ public class GridManager : MonoBehaviour
                 content.transform);
 
                 BaseTile tile = obj.GetComponent<BaseTile>();
+                tile.isInGrid = true;
                 tile.tileID = gridData.tiles[y * gridData.width + x];
                 tile.Initialize(new Vector2Int(x, y));
                 tiles[x, y] = tile;
@@ -129,6 +130,7 @@ public class GridManager : MonoBehaviour
 
         BaseTile tile = obj.GetComponent<BaseTile>();
         tile.tileID = tileID;
+        tile.isInGrid = true;
         tile.Initialize(new Vector2Int(x, y));
         tiles[x, y] = tile;
 

@@ -6,9 +6,15 @@ public class WorldButtonHandler : MonoBehaviour
 {
     public static WorldButtonHandler instance;
 
+    [Header("References")]
     public Camera cam;
     private GameActions controls;
+    [SerializeField] private TileDragHandler tileDragHandler;
+
+    [Header("Settings")]
+    public Vector3 mouseWorldPos;
     public UnityEvent MouseReleaseEvent;
+    private bool dragBuffer;
 
     private void Awake()
     {
@@ -27,31 +33,42 @@ public class WorldButtonHandler : MonoBehaviour
         Vector3 worldPos = GetWorldPosition();
 
         RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
+
+
         if (hit.collider != null)
         {
-
-            if (hit.transform.CompareTag("Clickable"))
+            GameObject go = hit.transform.gameObject;
+            switch (hit.transform.tag)
             {
-                hit.transform.GetComponent<PanelButtons>().OnClick();
+                case "Clickable":
+                    break;
+                case "Tile":
+                    if (tileDragHandler.isDragging)
+                        tileDragHandler.SwapTile(hit.transform.GetComponent<BaseTile>());
+                    else
+                    {
+                        tileDragHandler.TryPickUpTile(go.GetComponent<BaseTile>(), go.GetComponent<SpriteRenderer>().sprite);
+                        dragBuffer = true;
+                    }
+                    break;
+                case "GridDraggable":
+                    break;
+                default:
+                    break;
             }
 
-            if (hit.transform.CompareTag("Tile"))
-            {
-                hit.transform.GetComponent<BaseTile>().OnClick();
-            }
-
-            if (hit.transform.CompareTag("GridDraggable"))
-            {
-                hit.transform.GetComponent<DragHandle>().OnClick();
-            }
         }
+
+        if (tileDragHandler.isDragging && !dragBuffer)
+            tileDragHandler.DropTile();
+        dragBuffer = false;
     }
 
     void Update()
     {
-        Vector3 vector3 = GetWorldPosition();
+        mouseWorldPos = GetWorldPosition();
 
-        RaycastHit2D hit = Physics2D.Raycast(vector3, Vector2.zero);
+        RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
         if (hit.collider != null)
         {
             if (hit.transform.CompareTag("Tile"))
